@@ -12,13 +12,12 @@
 <body>
 
   <section class="section">
-    <h1 class="title">Hillcrest Trash Sorting</h1>
 
     <div class="columns">
-      <div class="column">
+      <div class="column is-one-third">
         <div class="card">
           <div class="card-content">
-            <div id="webcam-container" style="min-width: 300px; min-height: 300px;"></div>
+            <div id="webcam-container" style="min-width: 200px; min-height: 200px;"></div>
           </div>
           <footer class="card-footer">
             <a href="#" class="card-footer-item" onclick="init()">Start</a>
@@ -48,7 +47,18 @@
 
   </section>
   <section class="section">
-    <h1 class="title">Sorting</h1>
+    <h2 class="subtitle">Hillcrest Trash Sorting</h2>
+    <table class="table fullwidth">
+      <tr>
+        <td>
+          Trash
+          <img src="Trash-Image.png" />
+        </td>
+        <td>Recycling <img src="Recycling-Image.png" /></td>
+        <td>Compost <img src="Compost-Image.png" /></td>
+      </tr>
+
+    </table>
   </section>
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
@@ -78,7 +88,7 @@
 
       // Convenience function to setup a webcam
       const flip = true; // whether to flip the webcam
-      webcam = new tmImage.Webcam(300, 300, flip); // width, height, flip
+      webcam = new tmImage.Webcam(240, 240, flip); // width, height, flip
       await webcam.setup(); // request access to the webcam
       await webcam.play();
       window.requestAnimationFrame(loop);
