@@ -12,12 +12,11 @@
 <body>
 
   <section class="section">
-
     <div class="columns">
-      <div class="column is-one-third">
-        <div class="card">
+      <div class="column is-narrow">
+        <div class="card is-size-7">
           <div class="card-content">
-            <div id="webcam-container" style="min-width: 200px; min-height: 200px;"></div>
+            <div id="webcam-container" style="width: 180px; height: 180px; background-color: lightgray;"></div>
           </div>
           <footer class="card-footer">
             <a href="#" class="card-footer-item" onclick="init()">Start</a>
@@ -44,16 +43,19 @@
       </div>
     </div>
 
+    <div class="container max-width">
+      <div class="columns is-centered">
+        <img class="image is-inline-block" src="hillcrest_robot_001.png" style="max-height:300px; max-width: 50%">
+      </div>
+    </div>
+
+
 
   </section>
-  <section class="section">
-    <h2 class="subtitle">Hillcrest Trash Sorting</h2>
-    <table class="table fullwidth">
+  <section class="section" style="text-align: center;">
+    <table class="table is-inline-block">
       <tr>
-        <td>
-          Trash
-          <img src="Trash-Image.png" />
-        </td>
+        <td>Trash <img src="Trash-Image.png" /></td>
         <td>Recycling <img src="Recycling-Image.png" /></td>
         <td>Compost <img src="Compost-Image.png" /></td>
       </tr>
@@ -95,13 +97,15 @@
 
       // append elements to the DOM
       document.getElementById("webcam-container").appendChild(webcam.canvas);
+      var canvas = document.getElementById("webcam-container").querySelector("canvas");
+      canvas.style.maxWidth = "100%";
       for (let i = 0; i < maxPredictions; i++) {
         tblPredictionLabels.appendChild(tmplLabelRow.content.cloneNode(true));
       }
     }
 
     async function loop() {
-      if (Date.now() < lastTick + 200) {
+      if (Date.now() < lastTick + 333) {
         window.requestAnimationFrame(loop);
         return;
       }
