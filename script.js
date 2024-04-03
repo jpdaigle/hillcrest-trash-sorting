@@ -52,9 +52,9 @@ function destroyWebcam() {
 
 async function loop() {
   if (!webcam) {
-    return;
+    return; // we destroyed it with "stop"
   }
-  // throttle to 10 fps or so
+  // throttle to 10 fps or so to save a bit of battery
   if (Date.now() < lastTick + 100) {
     window.requestAnimationFrame(loop);
     return;
@@ -73,13 +73,15 @@ async function predict() {
 
     const row = tblPredictionLabels.rows[i];
     const probability = prediction[i].probability;
-    row.cells[0].innerText = prediction[i].className;
-    row.cells[1].innerText = prediction[i].probability.toFixed(2);
+    const className = prediction[i].className;
+    row.cells[0].innerText = className;
+    row.cells[1].innerText = probability.toFixed(2);
     const prog = row.cells[2].querySelector("progress");
     prog.value = probability;
     if (probability > 0.8) {
+      // confident prediction! emit a ding, update states, etc
       prog.classList.add("is-success");
-      emitDetection(prediction[i].className)
+      emitDetection(className)
     } else {
       prog.classList.remove("is-success");
     }
