@@ -4,6 +4,7 @@
 // the link to your model provided by Teachable Machine export panel
 //const URL = "https://teachablemachine.withgoogle.com/models/rYnyUCVkP/";
 const URL = "model1/";
+
 let model, webcam, labelContainer, maxPredictions;
 let lastTick = 0;
 let lastDetectionClass = null;
@@ -28,7 +29,9 @@ async function init() {
 
   // append elements to the DOM
   document.getElementById("webcam-container").appendChild(webcam.canvas);
-  var canvas = document.getElementById("webcam-container").querySelector("canvas");
+  var canvas = document
+    .getElementById("webcam-container")
+    .querySelector("canvas");
   canvas.style.maxWidth = "100%";
 
   // Build a table for our classification outputs
@@ -40,7 +43,6 @@ async function init() {
   }
 
   window.requestAnimationFrame(loop);
-
 }
 
 function destroyWebcam() {
@@ -70,7 +72,6 @@ async function predict() {
   // predict can take in an image, video or canvas html element
   const prediction = await model.predict(webcam.canvas);
   for (let i = 0; i < maxPredictions; i++) {
-
     const row = tblPredictionLabels.rows[i];
     const probability = prediction[i].probability;
     const className = prediction[i].className;
@@ -81,14 +82,12 @@ async function predict() {
     if (probability > 0.8) {
       // confident prediction! emit a ding, update states, etc
       prog.classList.add("is-success");
-      emitDetection(className)
+      emitDetection(className);
     } else {
       prog.classList.remove("is-success");
     }
-
   }
 }
-
 
 function emitDetection(classname) {
   if (lastDetectionClass == classname) {
@@ -97,12 +96,11 @@ function emitDetection(classname) {
   lastDetectionClass = classname;
 
   // temp: classname adapter for testing (remove this with final model the kids build)
-  var detectedClass = { 'face': 'recycling', 'glass': 'compost', 'hand': 'trash' }[classname];
+  var detectedClass = { face: "recycling", glass: "compost", hand: "trash" }[
+    classname
+  ];
   if (detectedClass) {
     swapPredictionImage(detectedClass);
-
-
-
   }
 }
 

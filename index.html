@@ -1,13 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>hillcrest trash sorting</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <link href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css" rel="stylesheet" type="text/css" />
-</head>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>hillcrest trash sorting</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="deps2/bulma.min.css" rel="stylesheet" type="text/css" />
+  </head>
 
 <body>
   <section class="section">
@@ -91,13 +90,16 @@
 
     <!-- end debug controls pane -->
 
-    <div class="container max-width">
-      <div class="columns is-centered">
-        <img class="image is-inline-block" src="hillcrest_robot_001.png" style="max-height:300px; max-width: 50%">
+      <div class="container max-width">
+        <div class="columns is-centered">
+          <img
+            class="image is-inline-block"
+            src="hillcrest_robot_001.png"
+            style="max-height: 300px; max-width: 50%"
+          />
+        </div>
       </div>
-    </div>
-
-  </section>
+    </section>
   <section class="section is-centered" style="text-align: center;">
 
     <div class="hero-body">
@@ -105,29 +107,21 @@
         <p class="title">Recycling</p>
         <img src="Recycling-Image.png" style="width:50%" />
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section" style="text-align: center;">
-    <table class="table is-inline-block">
-      <tr>
-        <td>Trash <img src="Trash-Image.png" /></td>
-        <td>Recycling <img src="Recycling-Image.png" /></td>
-        <td>Compost <img src="Compost-Image.png" /></td>
-      </tr>
+    <section class="section" style="text-align: center">
+      <table class="table is-inline-block">
+        <tr>
+          <td>Trash <img src="Trash-Image.png" /></td>
+          <td>Recycling <img src="Recycling-Image.png" /></td>
+          <td>Compost <img src="Compost-Image.png" /></td>
+        </tr>
+      </table>
+    </section>
 
-    </table>
-  </section>
-
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
-  <script type="text/javascript">
-
-
-
-  </script>
-
-</body>
-
+    <script src="script.js"></script>
+    <script src="deps2/tf.min.js"></script>
+    <script src="deps2/teachablemachine-image.min.js"></script>
+    <script type="text/javascript"></script>
+  </body>
 </html>
