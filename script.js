@@ -100,6 +100,9 @@ function emitDetection(classname) {
   var detectedClass = { 'face': 'recycling', 'glass': 'compost', 'hand': 'trash' }[classname];
   if (detectedClass) {
     swapPredictionImage(detectedClass);
+
+
+
   }
 }
 
@@ -110,17 +113,28 @@ function swapPredictionImage(classname) {
   var elImg = boxcontainer.querySelector("img");
   var elTitle = boxcontainer.querySelector("p.title");
 
+  var compostAudios = [elAudioCompost1, elAudioCompost2];
+  var trashAudios = [elAudioTrash1];
+  var recyclingAudios = [elAudioRecycling1, elAudioRecycling2];
+
+  function pick(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
   switch (classname) {
     case "recycling":
       elImg.src = "Recycling-Image.png";
       elTitle.innerText = "Recycling";
+      pick(recyclingAudios).play();
       break;
     case "compost":
       elImg.src = "Compost-Image.png";
       elTitle.innerText = "Compost";
+      pick(compostAudios).play();
       break;
     default:
       elImg.src = "Trash-Image.png";
       elTitle.innerText = "Trash";
+      pick(trashAudios).play();
   }
 }

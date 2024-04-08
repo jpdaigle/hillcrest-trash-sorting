@@ -11,37 +11,85 @@
 
 <body>
   <section class="section">
-    <div class="columns">
-      <div class="column is-narrow">
-      </div>
 
 
-      <div class="column">
-        <div class="box">
-          <div class="card is-size-7">
-            <div class="card-content">
-              <div id="webcam-container" style="width: 180px; height: 180px; background-color: lightgray;"></div>
+    <div class="box">
+      <details id="detailsDebugPanel" open>
+        <summary>
+          <button id="btnDebugPanel" class="button is-danger is-rounded"
+            onclick="detailsDebugPanel.open = !detailsDebugPanel.open">Debug Controls</button>
+        </summary>
+        <div class="columns">
+
+          <div class="column is-narrow">
+            <div class="card is-size-7">
+              <div class="card-content">
+                <div id="webcam-container" style="width: 180px; height: 180px; background-color: lightgray;"></div>
+              </div>
+              <footer class="card-footer">
+                <a href="#" class="card-footer-item" onclick="init()">Start</a>
+                <a href="#" class="card-footer-item" onclick="destroyWebcam()">Stop</a>
+              </footer>
             </div>
-            <footer class="card-footer">
-              <a href="#" class="card-footer-item" onclick="init()">Start</a>
-              <a href="#" class="card-footer-item" onclick="destroyWebcam()">Stop</a>
-            </footer>
           </div>
+          <div class="column">
 
-          <table id="tblPredictionLabels" class="table is-fullwidth">
-          </table>
-          <template id="tmplLabelRow">
-            <tr>
-              <td>class</td>
-              <td>0.22</td>
-              <td style="width:70%"><progress class="progress is-info" value="0.2" max="1"></progress></td>
-            </tr>
-          </template>
-          <div id="label-container" class="block"></div>
+            <table id="tblPredictionLabels" class="table is-fullwidth">
+              <tr>
+                <td>class</td>
+                <td>0.22</td>
+                <td style="width:70%"><progress class="progress is-info" value="0.2" max="1"></progress></td>
+              </tr>
+              <tr>
+                <td>class</td>
+                <td>0.22</td>
+                <td style="width:70%"><progress class="progress is-info" value="0.2" max="1"></progress></td>
+              </tr>
 
+            </table>
+            <template id="tmplLabelRow">
+              <tr>
+                <td>class</td>
+                <td>0.22</td>
+                <td style="width:70%"><progress class="progress is-info" value="0.2" max="1"></progress></td>
+              </tr>
+            </template>
+            <div id="label-container" class="block"></div>
+            <hr />
+            <!-- All our audio samples: preload -->
+            <nav class="level">
+              <div class="level-item">ping <audio id="elAudioPing" controls src="media/ping-82822.mp3"></audio> </div>
+            </nav>
+            <nav class="level">
+              <div class="level-item">compost 1 <audio id="elAudioCompost1" controls
+                  src="media/v_compost_1.m4a"></audio> </div>
+            </nav>
+            <nav class="level">
+              <div class="level-item">compost 2 <audio id="elAudioCompost2" controls
+                  src="media/v_compost_2.m4a"></audio> </div>
+            </nav>
+            <nav class="level">
+              <div class="level-item">recycling 1 <audio id="elAudioRecycling1" controls
+                  src="media/v_recycling_1.m4a"></audio> </div>
+            </nav>
+            <nav class="level">
+              <div class="level-item">recycling 2 <audio id="elAudioRecycling2" controls
+                  src="media/v_recycling_2.m4a"></audio> </div>
+            </nav>
+            <nav class="level">
+              <div class="level-item">trash 1 <audio id="elAudioTrash1" controls src="media/v_trash_1.m4a"></audio>
+              </div>
+            </nav>
+
+
+          </div>
         </div>
-      </div>
+      </details>
+
     </div>
+    </div>
+
+    <!-- end debug controls pane -->
 
     <div class="container max-width">
       <div class="columns is-centered">
@@ -49,12 +97,8 @@
       </div>
     </div>
 
-
-
   </section>
   <section class="section is-centered" style="text-align: center;">
-    <audio id="elAudioPing" src="ping-82822.mp3"></audio>
-    <!-- TODO: add the kids voice recordings for the 3 buckets -->
 
     <div class="hero-body">
       <div class="box" style="text-align: center;" id="boxTrashKind">
