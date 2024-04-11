@@ -3,7 +3,7 @@
 
 // the link to your model provided by Teachable Machine export panel
 //const URL = "https://teachablemachine.withgoogle.com/models/rYnyUCVkP/";
-const URL = "model1/";
+const URL = "model2/";
 
 let model, webcam, labelContainer, maxPredictions;
 let lastTick = 0;
@@ -79,7 +79,7 @@ async function predict() {
     row.cells[1].innerText = probability.toFixed(2);
     const prog = row.cells[2].querySelector("progress");
     prog.value = probability;
-    if (probability > 0.8) {
+    if (probability > 0.7) {
       // confident prediction! emit a ding, update states, etc
       prog.classList.add("is-success");
       emitDetection(className);
@@ -96,15 +96,14 @@ function emitDetection(classname) {
   lastDetectionClass = classname;
 
   // temp: classname adapter for testing (remove this with final model the kids build)
-  var detectedClass = { face: "recycling", glass: "compost", hand: "trash" }[
-    classname
-  ];
-  if (detectedClass) {
-    swapPredictionImage(detectedClass);
-  }
+  // var detectedClass = { face: "recycling", glass: "compost", hand: "trash" }[
+  //   classname
+  // ];
+  swapPredictionImage(classname);
 }
 
 function swapPredictionImage(classname) {
+  console.log(">>> swapPredictionImage", classname);
   elAudioPing.play();
 
   var boxcontainer = boxTrashKind;
@@ -130,9 +129,14 @@ function swapPredictionImage(classname) {
       elTitle.innerText = "Compost";
       pick(compostAudios).play();
       break;
-    default:
+    case "trash":
       elImg.src = "Trash-Image.png";
       elTitle.innerText = "Trash";
       pick(trashAudios).play();
+      break;
+    default:
+      elImg.src = "none.jpg";
+      elTitle.innerText = "Unknown";
+      break;
   }
 }
