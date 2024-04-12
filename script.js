@@ -8,16 +8,13 @@ const URL = "model2/";
 let model, webcam, labelContainer, maxPredictions;
 let lastTick = 0;
 let lastDetectionClass = null;
+let lastDetectionTime = 0;
 
 // Load the image model and setup the webcam
 async function init() {
+  loaderProgress.classList.remove("is-hidden");
   const modelURL = URL + "model.json";
   const metadataURL = URL + "metadata.json";
-
-  // load the model and metadata
-  // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-  // or files from your local hard drive
-  // Note: the pose library adds "tmImage" object to your window (window.tmImage)
   model = await tmImage.load(modelURL, metadataURL);
   maxPredictions = model.getTotalClasses();
 
@@ -43,6 +40,7 @@ async function init() {
   }
 
   window.requestAnimationFrame(loop);
+  loaderProgress.classList.add("is-hidden");
 }
 
 function destroyWebcam() {
@@ -50,6 +48,7 @@ function destroyWebcam() {
   webcam.stop();
   webcamcontainer = document.getElementById("webcam-container");
   webcamcontainer.removeChild(webcamcontainer.firstChild);
+  webcam = null;
 }
 
 async function loop() {
@@ -57,7 +56,7 @@ async function loop() {
     return; // we destroyed it with "stop"
   }
   // throttle to 10 fps or so to save a bit of battery
-  if (Date.now() < lastTick + 100) {
+  if (Date.now() < lastTick + 200) {
     window.requestAnimationFrame(loop);
     return;
   }
@@ -79,6 +78,7 @@ async function predict() {
     row.cells[1].innerText = probability.toFixed(2);
     const prog = row.cells[2].querySelector("progress");
     prog.value = probability;
+
     if (probability > 0.7) {
       // confident prediction! emit a ding, update states, etc
       prog.classList.add("is-success");
@@ -87,18 +87,20 @@ async function predict() {
       prog.classList.remove("is-success");
     }
   }
+  // sort MAX first
+  prediction.sort((a, b) => b.probability - a.probability);
+  dbgLabel.innerText = `prediction: ${prediction[0].className}, ${prediction[0].probability.toFixed(2)}`;
 }
 
 function emitDetection(classname) {
-  if (lastDetectionClass == classname) {
+  const timeElapsedSinceLastDetection =
+    (new Date().getTime() - lastDetectionTime) / 1000;
+  if (lastDetectionClass == classname || timeElapsedSinceLastDetection < 5) {
     return;
   }
   lastDetectionClass = classname;
+  lastDetectionTime = new Date().getTime();
 
-  // temp: classname adapter for testing (remove this with final model the kids build)
-  // var detectedClass = { face: "recycling", glass: "compost", hand: "trash" }[
-  //   classname
-  // ];
   swapPredictionImage(classname);
 }
 
