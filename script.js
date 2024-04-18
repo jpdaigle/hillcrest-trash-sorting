@@ -3,7 +3,7 @@
 
 // the link to your model provided by Teachable Machine export panel
 //const URL = "https://teachablemachine.withgoogle.com/models/rYnyUCVkP/";
-const URL = "model2/";
+const URL = "model3/";
 
 let model, webcam, labelContainer, maxPredictions;
 let lastTick = 0;
@@ -137,8 +137,9 @@ function swapPredictionImage(classname) {
       pick(trashAudios).play();
       break;
     default:
-      elImg.src = "none.jpg";
-      elTitle.innerText = "Unknown";
+      // "other class", just ignore it and leave the last detection on screen
+      // elImg.src = "none.jpg";
+      // elTitle.innerText = "Unknown";
       break;
   }
 }

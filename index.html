@@ -16,14 +16,14 @@
       <details id="detailsDebugPanel" open>
         <summary>
           <button id="btnDebugPanel" class="button is-danger is-rounded"
-            onclick="detailsDebugPanel.open = !detailsDebugPanel.open">Debug Controls</button>
+            onclick="detailsDebugPanel.open = !detailsDebugPanel.open">Debug Controls (show/hide)</button>
         </summary>
         <div class="columns">
 
           <div class="column is-narrow">
             <div class="card is-size-7">
               <div class="card-content">
-                <div id="webcam-container" style="width: 180px; height: 180px; background-color: lightgray;"></div>
+                camera control
                 <progress id="loaderProgress" class="progress is-info is-small is-hidden" max="1"></progress>
               </div>
               <footer class="card-footer">
@@ -93,11 +93,18 @@
 
       <div class="container max-width">
         <div class="columns is-centered has-text-centered">
+          <nav class="level">
+            <div class="level-item">
           <img
             class="image is-inline-block"
             src="hillcrest_robot_smile.png"
             style="max-height: 340px; max-width: 90%"
           />
+            </div>
+            <div class="level-item">
+          <div id="webcam-container" style="width: 180px; height: 180px; background-color: lightgray;"></div>
+            </div>
+          </nav>
         </div>
       </div>
 
